@@ -10,4 +10,18 @@ const criar = async (req, res) => {
     res.status(201).json(livro);
 }
 
-module.exports = { criar };
+
+const buscarPorId = async (req, res,) => {
+  try{
+    const { id } = req.params;
+    const livro = await buscarLivroPorId(id);
+    if (!livro) return res.status(404).json({ erro: 'Livro não encontrado' });
+    res.json(livro);
+
+    return res.status(200).json(livro);
+  } catch (error) {
+    return res.status(500).json({ erro: 'Erro ao buscar livro' });
+    }
+}
+
+module.exports = { criar, buscarPorId };
